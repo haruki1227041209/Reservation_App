@@ -1,0 +1,29 @@
+<h1>3</h1>
+<h1>ユーザー登録</h1>
+
+<%= form_with model: @user, url: signup_path, local: true do |form| %>
+  <% if @user.errors.any? %>
+    <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form.label :name, '名前' %>
+  <%= form.text_field :name %>
+
+  <%= form.label :email, 'メールアドレス' %>
+  <%= form.email_field :email %>
+
+  <%= form.label :password, 'パスワード' %>
+  <%= form.password_field :password %>
+
+  <%= form.label :password_confirmation, 'パスワード(確認)' %>
+  <%= form.password_field :password_confirmation %>
+
+  <%= form.submit '登録' %>
+
+  <p><%= link_to 'ログイン', logout_path, method: :delete %></p>
+<% end %>

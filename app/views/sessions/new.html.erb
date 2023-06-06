@@ -1,0 +1,16 @@
+<h1>2</h1>
+<h1>ログイン</h1>
+
+<%= form_with model: @session, local: true do |form| %>
+  <%= flash[:danger] %>
+
+  <%= form.label :email, 'メールアドレス' %>
+  <%= form.email_field :email %>
+
+  <%= form.label :password, 'パスワード' %>
+  <%= form.password_field :password %>
+
+  <%= form.submit 'ログイン' %>
+  
+  <p><%= link_to 'アカウント作成', signup_path %></p>
+<% end %>
