@@ -1,33 +1,54 @@
 <h1>6</h1>
-<h1>ユーザー編集</h1>
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>プロフィール編集</h1>
+  </div>
 
-アイコン画像
-名前：
-自己紹介
+  <%= form_with model: @user, url: update_profile_path(@user), html: { method: :patch, multipart: true }, local: true do |form| %>
+    <% if @user.errors.any? %>
+      <div class="error-messages">
+        <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= form_with model: @user, local: true do |form| %>
-  <% if @user.errors.any? %>
-    <strong><%= @user.errors.count %>個のエラーがあります。</strong>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <div class="form-field">
+      <div class="profile-image">
+        <% if @user.icon.present? %>
+          <%= image_tag @user.icon, size: "100x100" %>
+        <% else %>
+          <%= image_tag "icon.png", size: "100x100" %>
+        <% end %>
+        <%= form.file_field :icon %>
+      </div>
+      
+    </div>
+
+    <div class="form-field">
+      <%= form.label :name, '名前' %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :bio, '自己紹介' %>
+      <%= form.text_area :bio %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit '編集完了' %>
+    </div>
   <% end %>
 
-  <%= form.label :name, '名前' %>
-  <%= form.text_field :name %>
-
-  <%= form.label :email, 'メールアドレス' %>
-  <%= form.email_field :email %>
-
-  <%= form.label :password, 'パスワード' %>
-  <%= form.password_field :password %>
-
-  <%= form.label :password_confirmation, 'パスワード(確認)' %>
-  <%= form.password_field :password_confirmation %>
-
-  <%= form.submit '編集完了' %>
-
-  <p><%= link_to 'キャンセル', show_profile_path(@user) %></p>
-<% end %>
+  <div class="profile-links">
+    <table>
+      <tr>
+        <td><%= link_to 'アカウント', show_account_path(@user) %></td>
+        <td><%= link_to 'プロフィール', show_profile_path(@user) %></td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -8,10 +8,89 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   </head>
 
+  <style>
+    .logged-in-header {
+      background-color: #f1f1f1;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logged-in-header h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .logged-out-header {
+      background-color: #ccc;
+      padding: 20px;
+      text-align: center;
+    }
+  
+    .logged-out-header h1 {
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .user-info img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+
   <body>
-    <h1>宿泊予約アプリ作ってまーす</h1>
+    <% if logged_in? %>
+      <div class="logged-in-header">
+        <!-- ログイン中のヘッダー -->
+        
+        <div class="user-info">
+          <span><%= current_user.name %></span>
+          <div class="user-info-space"></div>
+
+          <div class="dropdown">
+            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag(current_user.icon, size: "50x50", class: "user-icon") %>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'ログアウト', logout_path, method: :delete, class: "dropdown-item" %>
+              <%= link_to '登録解除', unsubscribe_path(@user), method: :delete, data: { confirm: '本当に登録解除しますか？' }, class: "dropdown-item" %>
+              <!-- 追加のメニュー項目をここに追記 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 他のログイン中のヘッダー要素 -->
+      </div>
+    <% else %>
+      <div class="logged-out-header">
+        <!-- ログアウト中のヘッダー -->
+        <h1>ログアウト中のヘッダー</h1>
+        <!-- 他のログアウト中のヘッダー要素 -->
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
