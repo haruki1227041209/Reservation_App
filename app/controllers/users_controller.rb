@@ -13,8 +13,39 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
+  def show_account
     @user = User.find(params[:id])
+  end
+  
+  def show
+    redirect_to show_profile_path
+  end
+
+  def show_profile
+    @user = User.find(params[:id])
+  end
+  
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def edit_profile
+    @user = User.find(params[:id])
+  end
+
+  def edit_account
+    @user = User.find(params[:id])
+  end
+
+  def update_profile
+    @user = User.find(params[:id])
+     if @user.update(params.require(:user).permit(:icon, :name, :bio))
+       flash[:notice] = "ユーザーIDが「#{@user.id}」の情報を更新しました"
+       redirect_to show_profile_path
+     else
+       render "edit"
+     end
   end
 
   def destroy
@@ -24,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
 end

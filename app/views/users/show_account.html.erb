@@ -1,0 +1,14 @@
+<h1>5</h1>
+<h1>ユーザー情報</h1>
+
+<% if @user %>
+  <p>メールアドレス：<%= @user.email %></p>
+  <p>パスワード：********* </p>
+
+  <p><%= link_to 'ログアウト', logout_path, method: :delete %></p>
+<% else %>
+  <p>ユーザーが見つかりません。</p>
+<% end %>
+
+<p><%= link_to 'アカウント', show_account_path(@user) %></p>
+<p><%= link_to 'プロフィール', show_profile_path(@user) %></p>

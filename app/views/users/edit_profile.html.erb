@@ -1,7 +1,11 @@
-<h1>3</h1>
-<h1>ユーザー登録</h1>
+<h1>6</h1>
+<h1>ユーザー編集</h1>
 
-<%= form_with model: @user, url: signup_path, local: true do |form| %>
+アイコン画像
+名前：
+自己紹介
+
+<%= form_with model: @user, local: true do |form| %>
   <% if @user.errors.any? %>
     <strong><%= @user.errors.count %>個のエラーがあります。</strong>
     <ul>
@@ -23,7 +27,7 @@
   <%= form.label :password_confirmation, 'パスワード(確認)' %>
   <%= form.password_field :password_confirmation %>
 
-  <%= form.submit '登録' %>
+  <%= form.submit '編集完了' %>
 
-  <p><%= link_to 'ログイン', login_path %></p>
+  <p><%= link_to 'キャンセル', show_profile_path(@user) %></p>
 <% end %>

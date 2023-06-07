@@ -1,0 +1,21 @@
+<h1>4</h1>
+<h1>ユーザー情報</h1>
+
+<% if @user.icon.present? %>
+  <img src="<%= @user.icon %>" alt="アイコン">
+<% else %>
+  <%= image_tag "icon.png", size: "30x25" %>
+<% end %>
+
+<p>名前：<%= @user.name %></p>
+
+<p>自己紹介：<%= @user.bio %></p>
+
+<p><%= link_to 'ログアウト', logout_path, method: :delete %></p>
+<p><%= link_to '登録解除', unsubscribe_path(@user), method: :delete, data: { confirm: '本当に登録解除しますか？' } %></p>
+
+<p><%= link_to "編集", edit_profile_path(@user) %></p>
+
+<p><%= link_to 'アカウント', show_account_path(@user) %></p>
+<p><%= link_to 'プロフィール', show_profile_path(@user) %></p>
+
