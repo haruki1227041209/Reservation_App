@@ -1,0 +1,38 @@
+<h1>15</h1>
+<h1>施設詳細</h1>
+
+<div class="room-container">
+  <div class="room-header">
+    <a href="javascript:void(0)" onclick="window.history.back()">戻る</a>
+    <p><%= link_to "編集", edit_room_path(@room) %></p>
+  </div>
+
+  <div class="room-image">
+    <% if @room.room_image.present? %>
+      <%= image_tag @room.room_image %>
+    <% else %>
+      <%= image_tag "room_image.png" %>
+    <% end %>
+  </div>
+
+  <div class="room-content">
+    <table>
+      <tr>
+        <th>施設名</th>
+        <td><%= @room.room_name %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @room.address %></td>
+      </tr>
+      <tr>
+        <th>紹介文</th>
+        <td><%= @room.description %></td>
+      </tr>
+      <tr>
+        <th>料金</th>
+        <td><%= @room.room_fee %></td>
+      </tr>
+    </table>
+  </div>
+</div>

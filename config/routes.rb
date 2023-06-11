@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  resources :rooms
+  get '/users/:id/index_room', to: 'rooms#index', as: 'index_user_room'
+  get '/users/:id/new_room', to: 'rooms#new', as: 'new_user_room'
+  post '/users/:id/new_room', to: 'rooms#create'
+  get '/users/:user_id/rooms/:id', to: 'rooms#show', as: 'user_room'
 end

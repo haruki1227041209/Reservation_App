@@ -1,0 +1,45 @@
+<h1>13</h1>
+<div class="login-container">
+  <h1 class="login-heading">施設登録</h1>
+
+  <%= form_with(model: @room, url: new_user_room_path(id: @user.id), local: true) do |form| %>
+
+    <% if @room.errors.any? %>
+      <div class="error-messages">
+        <strong><%= @room.errors.count %>個のエラーがあります。</strong>
+        <ul>
+          <% @room.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :施設名 %>
+      <%= form.text_field :room_name, class:'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :施設詳細 %>
+      <%= form.text_area :description, class:'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :料金 %>
+      <%= form.number_field :room_fee, class:'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :住所 %>
+      <%= form.text_field :address, class:'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :施設画像 %>
+      <%= form.file_field :room_image, class:'form-control' %>
+    </div>
+
+    <%= form.submit '施設登録', class: 'login-button' %>
+  <% end %>
+</div>

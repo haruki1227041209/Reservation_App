@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
   has_one_attached :icon
 
-  validates :name, presence: true, length: { minimum: 1 }
+  validates :name, presence: true
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -21,4 +21,6 @@ class User < ApplicationRecord
       false
     end
   end
+
+  has_many :rooms, dependent: :destroy
 end

@@ -75,7 +75,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= link_to 'ログアウト', logout_path, method: :delete, class: "dropdown-item" %>
-              <%= link_to '登録解除', unsubscribe_path(@user), method: :delete, data: { confirm: '本当に登録解除しますか？' }, class: "dropdown-item" %>
+              <%= link_to '施設一覧', index_user_room_path(@user), class: "dropdown-item" %>
+              <%= link_to '施設登録', new_user_room_path(@user), class: "dropdown-item" %>
+              <%= link_to 'アカウント', show_account_path(@user), class: "dropdown-item" %>
               <!-- 追加のメニュー項目をここに追記 -->
             </div>
           </div>

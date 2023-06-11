@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_07_111000) do
+ActiveRecord::Schema.define(version: 2023_06_10_141811) do
 
   create_table "Users", force: :cascade do |t|
     t.string "name"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 2023_06_07_111000) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "room_image"
+    t.string "room_name"
+    t.text "description"
+    t.integer "room_fee"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "address"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

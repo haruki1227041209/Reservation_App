@@ -1,0 +1,31 @@
+<h3>投稿一覧</h3>
+ 
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>料金</th>
+      <th>作成日</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td>
+          <% if room.room_image.present? %>
+            <%= image_tag @room.room_image, size: "100x50" %>
+          <% else %>
+            <%= image_tag "room_image.png", size: "100x50" %>
+          <% end %>
+        </td>
+        <td><%= link_to room.room_name, room %></td>
+        <td><%= room.description %></td>
+        <td><%= room.room_fee %></td>
+        <td><%= room.created_at.to_s(:datetime_jp) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
