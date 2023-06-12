@@ -64,14 +64,23 @@
     <% if logged_in? %>
       <div class="logged-in-header">
         <!-- ログイン中のヘッダー -->
-        
+        <div class="header-logo">
+          <%= link_to toppage_path do %>
+            <%= image_tag "logo.png", alt: "Logo" %>
+          <% end %>
+        </div>
+
         <div class="user-info">
           <span><%= current_user.name %></span>
           <div class="user-info-space"></div>
 
           <div class="dropdown">
             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag(current_user.icon, size: "50x50", class: "user-icon") %>
+              <% if @user.icon.present? %>
+                <%= image_tag @user.icon, size: "50x50", class: "user-icon" %>
+              <% else %>
+                <%= image_tag "icon.png", size: "50x50", class: "user-icon" %>
+              <% end %>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= link_to 'ログアウト', logout_path, method: :delete, class: "dropdown-item" %>
@@ -88,6 +97,15 @@
     <% else %>
       <div class="logged-out-header">
         <!-- ログアウト中のヘッダー -->
+        <div class="header-logo">
+          <%= link_to toppage_path do %>
+            <%= image_tag "logo.png", alt: "Logo" %>
+          <% end %>
+        </div>
+        <div class="header-contents">
+          <%= link_to 'アカウント作成', signup_path, class: 'signup-link' %>
+          <%= link_to 'ログイン', login_path, class: 'signup-link' %>
+        </div>
         <h1>ログアウト中のヘッダー</h1>
         <!-- 他のログアウト中のヘッダー要素 -->
       </div>

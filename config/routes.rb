@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get '/users/:id/new_room', to: 'rooms#new', as: 'new_user_room'
   post '/users/:id/new_room', to: 'rooms#create'
   get '/users/:user_id/rooms/:id', to: 'rooms#show', as: 'user_room'
+  get '/toppage', to: 'rooms#index_toppage', as: 'toppage'
+  get '/search', to: 'rooms#search', as: 'search_rooms'
 end

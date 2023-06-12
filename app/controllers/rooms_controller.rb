@@ -1,8 +1,14 @@
 class RoomsController < ApplicationController
-  before_action :require_login, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  before_action :require_login, only: [:index, :new, :create, :edit, :update, :destroy]
   def index
     @user = current_user
+    @rooms = current_user.rooms
+  end
+
+  def index_toppage
+    @user = current_user
     @rooms = Room.all
+    @rooms = @rooms.search_by_address(params[:search_address]) if params[:search_address].present?
   end
 
   def new
@@ -11,12 +17,10 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:id])
+    @user = current_user
     @room = Room.new(room_params)
     @room.user = @user
-    puts "おはよう"
     if @room.save
-      puts "Redirecting to: #{user_room_path(user_id: @user.id, id: @room.id)}"
       redirect_to user_room_path(user_id: @user.id, id: @room.id), notice: '施設を登録しました'
     else
       flash.now[:error] = '施設の登録に失敗しました'
@@ -25,7 +29,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
     @room = Room.find(params[:id])
   end
 
@@ -38,8 +42,21 @@ class RoomsController < ApplicationController
   def destroy
   end
 
+  def search
+    @query = params[:search_query]
+    @rooms = Room.where("room_name LIKE :query OR description LIKE :query", query: "%#{@query}%")
+    @rooms = @rooms.where("address LIKE ?", "%#{params[:search_address]}%") if params[:search_address].present?
+    @user = current_user
+  end  
+
   private
   def room_params
     params.require(:room).permit(:room_image, :room_name, :description, :room_fee, :address)
+  end
+
+  def require_login
+    unless logged_in?
+      redirect_to login_path
+    end
   end
 end

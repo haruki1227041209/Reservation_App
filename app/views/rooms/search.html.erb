@@ -1,0 +1,37 @@
+<h3>検索結果</h3>
+
+<p>検索キーワード: <%= params[:search_query] || params[:search_address] %></p>
+<p>該当する施設は <%= @rooms.length %> 件あります。</p>
+
+<% if @rooms.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>画像</th>
+        <th>施設名</th>
+        <th>住所</th>
+        <th>紹介文</th>
+        <th>料金</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td>
+            <% if room.room_image.present? %>
+              <%= image_tag @room.room_image %>
+            <% else %>
+              <%= image_tag "room_image.png" %>
+            <% end %>
+          </td>
+          <td><%= link_to room.room_name, room %></td>
+          <td><%= room.address %></td>
+          <td><%= room.description %></td>
+          <td><%= room.room_fee %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>該当する施設はありません。</p>
+<% end %>
