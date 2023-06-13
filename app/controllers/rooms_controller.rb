@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :require_login, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :require_login, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   def index
     @user = current_user
     @rooms = current_user.rooms

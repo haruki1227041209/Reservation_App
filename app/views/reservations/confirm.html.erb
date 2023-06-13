@@ -1,0 +1,17 @@
+<h1>予約の確認</h1>
+
+<p>以下の予約情報を確認してください。</p>
+
+<p>チェックイン日: <%= @reservation.check_in_date %></p>
+<p>チェックアウト日: <%= @reservation.check_out_date %></p>
+<p>宿泊日数：<%= @reservation.stay_duration %></p>
+<p>宿泊人数: <%= @reservation.num_guests %></p>
+<p>合計料金: <%= @reservation.payment_amount %></p>
+
+<%= form_for @reservation, method: :post, url: confirm_user_reservation_path(user_id: @reservation.user_id, room_id: @reservation.room_id) do |form| %>
+	<%= form.hidden_field :check_in_date %>
+	<%= form.hidden_field :check_out_date %>
+	<%= form.hidden_field :num_guests %>
+	<%= form.submit '送信する' %>
+<% end %>
+

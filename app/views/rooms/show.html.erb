@@ -33,5 +33,6 @@
         <td><%= @room.room_fee %></td>
       </tr>
     </table>
+    <%= link_to '予約する', new_user_reservation_path(@user,@room,@reservation) %>
   </div>
 </div>

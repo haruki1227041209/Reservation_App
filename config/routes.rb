@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reservations/index'
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get '/signup', to: 'users#new'
@@ -24,4 +25,11 @@ Rails.application.routes.draw do
   get '/users/:user_id/rooms/:id', to: 'rooms#show', as: 'user_room'
   get '/toppage', to: 'rooms#index_toppage', as: 'toppage'
   get '/search', to: 'rooms#search', as: 'search_rooms'
+
+  resources :reservations
+  get 'index_reservation', to: 'reservations#index', as: 'index_user_reservation'
+  get '/users/:user_id/rooms/:room_id/new_reservation', to: 'reservations#new', as: 'new_user_reservation' # 入力画面
+  post '/users/:user_id/rooms/:room_id/new_reservation', to: 'reservations#create'
+  get '/reservation/confirm', to: 'reservations#confirm', as: 'confirm_user_reservation' # 確認画面
+  post '/reservation/confirm', to: 'reservations#confirm_create'
 end
