@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
 
   def new
+    session[:user_id] = nil
   end
 
   def create
