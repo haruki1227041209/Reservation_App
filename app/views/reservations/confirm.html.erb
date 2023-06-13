@@ -1,17 +1,64 @@
-<h1>予約の確認</h1>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    color: #333;
+  }
 
-<p>以下の予約情報を確認してください。</p>
+  h1 {
+    font-size: 24px;
+    margin: 20px;
+    color: #333;
+  }
 
-<p>チェックイン日: <%= @reservation.check_in_date %></p>
-<p>チェックアウト日: <%= @reservation.check_out_date %></p>
-<p>宿泊日数：<%= @reservation.stay_duration %></p>
-<p>宿泊人数: <%= @reservation.num_guests %></p>
-<p>合計料金: <%= @reservation.payment_amount %></p>
+  p {
+    margin-bottom: 10px;
+  }
 
-<%= form_for @reservation, method: :post, url: confirm_user_reservation_path(user_id: @reservation.user_id, room_id: @reservation.room_id) do |form| %>
-	<%= form.hidden_field :check_in_date %>
-	<%= form.hidden_field :check_out_date %>
-	<%= form.hidden_field :num_guests %>
-	<%= form.submit '送信する' %>
-<% end %>
+  .reservation-container {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .reservation-container form {
+    margin-top: 20px;
+  }
+
+  .reservation-container input[type="submit"] {
+    background-color: #3897f0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .reservation-container input[type="submit"]:hover {
+    background-color: #1976d2;
+  }
+</style>
+
+<div class="reservation-container">
+  <h1>予約の確認</h1>
+
+  <p>以下の予約情報を確認してください。</p>
+
+  <p>チェックイン日: <%= @reservation.check_in_date.strftime("%Y/%m/%d") %></p>
+  <p>チェックアウト日: <%= @reservation.check_out_date.strftime("%Y/%m/%d") %></p>
+  <p>宿泊日数：<%= @reservation.stay_duration %></p>
+  <p>宿泊人数: <%= @reservation.num_guests %></p>
+  <p>合計料金: <%= @reservation.payment_amount %></p>
+
+  <%= form_for @reservation, method: :post, url: confirm_user_reservation_path(user_id: @reservation.user_id, room_id: @reservation.room_id) do |form| %>
+    <%= form.hidden_field :check_in_date %>
+    <%= form.hidden_field :check_out_date %>
+    <%= form.hidden_field :num_guests %>
+    <%= form.submit '送信する' %>
+  <% end %>
+</div>
+
 

@@ -1,5 +1,33 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .reservation-image {
+    width: 100px;
+    height: 50px;
+    object-fit: cover;
+  }
+</style>
+
 <h3>予約一覧</h3>
- 
+
 <table>
   <thead>
     <tr>
@@ -16,15 +44,15 @@
   <tbody>
     <% @reservations.each do |reservation| %>
       <tr>
-      <td>
-        <% if reservation.room.room_image.present? %>
-          <%= image_tag @reservation.room.room_image, size: "100x50" %>
-        <% else %>
-          <%= image_tag "room_image.png", size: "100x50" %>
-        <% end %>
-      </td>
         <td>
-        <%= link_to reservation.room.room_name, reservation.room %>
+          <% if reservation.room.room_image.present? %>
+            <%= image_tag reservation.room.room_image, class: "reservation-image" %>
+          <% else %>
+            <%= image_tag "room_image.png", class: "reservation-image" %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to reservation.room.room_name, reservation.room %>
         </td>
         <td>
           <%= reservation.room.description %>
@@ -32,9 +60,9 @@
         <td>
           <%= reservation.payment_amount %>
         </td>
-        <td><%= reservation.check_in_date %></td>
-        <td><%= reservation.check_out_date %></td>
-        <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+        <td><%= reservation.check_in_date.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.check_out_date.strftime("%Y/%m/%d") %></td>
+        <td><%= reservation.created_at.in_time_zone("Tokyo").strftime("%Y/%m/%d %H:%M") %></td>
       </tr>
     <% end %>
   </tbody>

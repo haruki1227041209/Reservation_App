@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>ReservationApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,57 +13,80 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #3897f0;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 999;
+      }
+
+      .header-logo {
+        margin-right: 20px;
+      }
+
+      .header-logo img {
+        width: 120px;
+        height: auto;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-info img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .user-info span {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      .dropdown-menu {
+        left: auto !important;
+        right: 0 !important;
+        background-color: #f9f9f9;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown-menu a.dropdown-item {
+        color: #333;
+        font-size: 14px;
+      }
+
+      .dropdown-menu a.dropdown-item:hover {
+        background-color: #eee;
+      }
+
+      /* 追加: ヘッダーとコンテンツの間隔を調整 */
+      .content {
+        margin-top: 80px;
+        padding: 20px;
+      }
+    </style>
+
   </head>
-
-  <style>
-    .logged-in-header {
-      background-color: #f1f1f1;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .logged-in-header h1 {
-      color: #333;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .logged-out-header {
-      background-color: #ccc;
-      padding: 20px;
-      text-align: center;
-    }
-  
-    .logged-out-header h1 {
-      color: #fff;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .user-info img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-
-    .user-info span {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  </style>
 
   <body>
     <% if logged_in? %>
-      <div class="logged-in-header">
-        <!-- ログイン中のヘッダー -->
+      <div class="header">
         <div class="header-logo">
           <%= link_to toppage_path do %>
             <%= image_tag "logo.png", alt: "Logo" %>
@@ -72,17 +95,16 @@
 
         <div class="user-info">
           <span><%= current_user.name %></span>
-          <div class="user-info-space"></div>
 
           <div class="dropdown">
             <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <% if @user.icon.present? %>
-                <%= image_tag @user.icon, size: "50x50", class: "user-icon" %>
+                <%= image_tag @user.icon, size: "40x40", class: "user-icon" %>
               <% else %>
-                <%= image_tag "icon.png", size: "50x50", class: "user-icon" %>
+                <%= image_tag "icon.png", size: "40x40", class: "user-icon" %>
               <% end %>
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <%= link_to 'ログアウト', logout_path, method: :delete, class: "dropdown-item" %>
               <%= link_to '予約一覧', index_user_reservation_path(@user, @room), class: "dropdown-item" %>
               <%= link_to '施設一覧', index_user_room_path(@user), class: "dropdown-item" %>
@@ -92,26 +114,24 @@
             </div>
           </div>
         </div>
-
-        <!-- 他のログイン中のヘッダー要素 -->
       </div>
     <% else %>
-      <div class="logged-out-header">
-        <!-- ログアウト中のヘッダー -->
+      <div class="header">
         <div class="header-logo">
           <%= link_to toppage_path do %>
             <%= image_tag "logo.png", alt: "Logo" %>
           <% end %>
         </div>
+
         <div class="header-contents">
           <%= link_to 'アカウント作成', signup_path, class: 'signup-link' %>
           <%= link_to 'ログイン', login_path, class: 'signup-link' %>
         </div>
-        <h1>ログアウト中のヘッダー</h1>
-        <!-- 他のログアウト中のヘッダー要素 -->
       </div>
     <% end %>
 
-    <%= yield %>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>

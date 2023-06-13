@@ -1,19 +1,43 @@
-<h1>こんにちは</h1>
+<%= stylesheet_link_tag 'index_toppage' %>
 
-
-<h3>施設検索</h3>
-
-<%= form_tag search_rooms_path, method: :get do %>
-  <div class="search-form">
-    <%= text_field_tag :search_query, params[:search_query], placeholder: "施設名または施設詳細を入力してください" %>
-    <%= submit_tag "検索" %>
+<div class="main-container">
+  <div class="first-view">
+    <h2 class="FirstView__title">
+      旅の舞台は<br>Potepan Shareから<br>始めましょう。<br>最高の宿泊が待っています。
+    </h2>
+    <%= form_tag search_rooms_path, method: :get do %>
+      <div class="search-form">
+        <%= text_field_tag :search_query, params[:search_query], placeholder: "施設名または施設詳細を入力してください" %>
+        <%= submit_tag "検索" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
 
-
-<h3>都市別検索</h3>
-
-<%= link_to "東京", search_rooms_path(search_address: "東京"), class: "search-button" %>
-<%= link_to "大阪", search_rooms_path(search_address: "大阪"), class: "search-button" %>
-<%= link_to "京都", search_rooms_path(search_address: "京都"), class: "search-button" %>
-<%= link_to "札幌", search_rooms_path(search_address: "札幌"), class: "search-button" %>
+  <h3>おすすめの都市</h3>
+  <div class="city-links">
+    <div class="city-link">
+      <span class="city-link-text">東京</span>
+      <%= link_to search_rooms_path(search_address: "東京"), class: "search-button" do %>
+        <%= image_tag "tokyo.jpg", alt: "東京" %>
+      <% end %>
+    </div>
+    <div class="city-link">
+      <span class="city-link-text">大阪</span>
+      <%= link_to search_rooms_path(search_address: "大阪"), class: "search-button" do %>
+        <%= image_tag "osaka.jpg", alt: "大阪" %>
+      <% end %>
+    </div>
+    <div class="city-link">
+      <span class="city-link-text">京都</span>
+      <%= link_to search_rooms_path(search_address: "京都"), class: "search-button" do %>
+        <%= image_tag "kyoto.jpg", alt: "京都" %>
+      <% end %>
+    </div>
+    <div class="city-link">
+      <span class="city-link-text">札幌</span>
+      <%= link_to search_rooms_path(search_address: "札幌"), class: "search-button" do %>
+        <%= image_tag "sapporo.jpg", alt: "札幌" %>
+      <% end %>
+    </div>
+  </div>
+</div>
