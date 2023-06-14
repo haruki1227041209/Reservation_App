@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  root 'rooms#index_toppage'
+  get '/toppage', to: 'rooms#index_toppage', as: 'toppage'
+  
   resources :users do
     get '/signup', to: 'users#new', on: :collection
     post '/signup', to: 'users#create', on: :collection
@@ -16,8 +19,8 @@ Rails.application.routes.draw do
     
     resources :rooms do
       get 'index_room', on: :member, as: 'index_user_room'
-      get 'new_room', on: :member, as: 'new_user_room'
-      post 'new_room', on: :member
+      get 'new_room', on: :collection
+      
       get 'search', on: :member, as: 'search_rooms'
 
       resources :reservations do
@@ -33,13 +36,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  post '/users/:user_id/rooms/:room_id/reservations/new', to: 'reservations#create'
+  post '/users/:user_id/rooms/new', to: 'rooms#create'
   get '/reservations/index', to: 'reservations#index', as: 'reservations_index'
+  post '/users/:user_id/rooms/:room_id/reservations/new', to: 'reservations#create'
 
   resources :rooms
-
-  root 'rooms#index_toppage'
-  get '/toppage', to: 'rooms#index_toppage', as: 'toppage'
-  
   get '/search', to: 'rooms#search', as: 'search_rooms'
 end

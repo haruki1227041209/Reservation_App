@@ -12,8 +12,6 @@ class ReservationsController < ApplicationController
     @user = current_user
     @room = Room.find(params[:room_id])
     @reservation = Reservation.new
-    p 'おはようおはようおはよう'
-    p @reservation
   end
 
   def create
