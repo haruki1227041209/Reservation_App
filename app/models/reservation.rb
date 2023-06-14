@@ -4,11 +4,11 @@ class Reservation < ApplicationRecord
 
   validates :check_in_date, presence: true
   validates :check_out_date, presence: true
-  validates :num_guests, presence: true
+  validates :num_guests, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :end_date_after_start_date
 
   def end_date_after_start_date
-    if check_in_date.present? && check_out_date.present? && check_in_date > check_out_date
+    if check_in_date.present? && check_out_date.present? && check_in_date >= check_out_date
       errors.add(:check_in_date, "は開始日以降の日付に設定してください")
     end
   end

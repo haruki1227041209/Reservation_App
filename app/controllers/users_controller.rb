@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to show_profile_path(@user)
+      redirect_to show_profile_user_path(@user)
     else
       render 'new'
     end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    show_profile_path(current_user)
+    redirect_to show_profile_user_path(@user)
   end
 
   def show_profile
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def update_profile
     @user = current_user
     if @user.update(user_params)
-      redirect_to show_profile_path(@user), notice: 'プロフィールを更新しました。'
+      redirect_to show_profile_user_path(@user), notice: 'プロフィールを更新しました。'
     else
       render 'edit_profile'
     end
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   def update_account
     @user = current_user
     if @user.update_with_password(user_params)
-      redirect_to show_account_path(@user), notice: 'プロフィールを更新しました。'
+      redirect_to show_account_user_path(@user), notice: 'プロフィールを更新しました。'
     else
       render 'edit_account'
     end

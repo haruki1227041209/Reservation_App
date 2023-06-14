@@ -1,7 +1,7 @@
 <div class="login-container">
   <h1 class="login-heading">ユーザー登録</h1>
 
-  <%= form_with model: @user, url: signup_path, local: true do |form| %>
+  <%= form_with model: @user, url: signup_users_path, local: true do |form| %>
     <% if @user.errors.any? %>
       <div class="error-messages">
         <strong><%= @user.errors.count %>個のエラーがあります。</strong>

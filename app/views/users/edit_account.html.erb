@@ -3,7 +3,7 @@
     <h1>アカウント編集</h1>
   </div>
 
-  <%= form_with model: @user, url: update_account_path(@user), local: true do |form| %>
+  <%= form_with model: @user, url: update_account_user_path(@user), local: true do |form| %>
     <% if @user.errors.any? %>
       <div class="error-messages">
         <strong><%= @user.errors.count %>個のエラーがあります。</strong>
@@ -37,15 +37,15 @@
 
     <div class="form-actions">
       <%= form.submit '編集完了' %>
-      <%= link_to 'キャンセル', show_account_path(@user) %>
+      <%= link_to 'キャンセル', show_account_user_path(@user) %>
     </div>
   <% end %>
 
   <div class="profile-links">
     <table>
       <tr>
-        <td><%= link_to 'アカウント', show_account_path(@user) %></td>
-        <td><%= link_to 'プロフィール', show_profile_path(@user) %></td>
+        <td><%= link_to 'アカウント', show_account_user_path(@user) %></td>
+        <td><%= link_to 'プロフィール', show_profile_user_path(@user) %></td>
       </tr>
     </table>
   </div>

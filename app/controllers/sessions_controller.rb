@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       log_in(user)
       session[:user_id] = user.id
-      redirect_to user_path(user)
+      redirect_to show_profile_user_path(user)
     else
       flash.now[:danger] = 'メールアドレスかパスワードが間違っています。'
       render 'new'

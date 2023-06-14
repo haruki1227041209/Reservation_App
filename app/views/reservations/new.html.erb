@@ -1,7 +1,7 @@
 <div class="login-container">
   <h1 class="login-heading">宿泊予約</h1>
 
-  <%= form_with(model: @reservation, url: new_user_reservation_path(id: @user.id), local: true) do |form| %>
+  <%= form_with(model: @reservation, url: new_user_room_reservation_path(id: @user.id), local: true) do |form| %>
 
     <% if @reservation.errors.any? %>
       <div class="error-messages">

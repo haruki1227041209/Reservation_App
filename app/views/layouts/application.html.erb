@@ -106,10 +106,10 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <%= link_to 'ログアウト', logout_path, method: :delete, class: "dropdown-item" %>
-              <%= link_to '予約一覧', index_user_reservation_path(@user, @room), class: "dropdown-item" %>
-              <%= link_to '施設一覧', index_user_room_path(@user), class: "dropdown-item" %>
+              <%= link_to '予約一覧', reservations_index_path(@user, @room), class: "dropdown-item" %>
+              <%= link_to '施設一覧', user_rooms_path(@user), class: "dropdown-item" %>
               <%= link_to '施設登録', new_user_room_path(@user), class: "dropdown-item" %>
-              <%= link_to 'アカウント', show_account_path(@user), class: "dropdown-item" %>
+              <%= link_to 'アカウント', show_account_user_path(@user), class: "dropdown-item" %>
               <!-- 追加のメニュー項目をここに追記 -->
             </div>
           </div>
@@ -124,7 +124,7 @@
         </div>
 
         <div class="header-contents">
-          <%= link_to 'アカウント作成', signup_path, class: 'signup-link' %>
+          <%= link_to 'アカウント作成', signup_users_path, class: 'signup-link' %>
           <%= link_to 'ログイン', login_path, class: 'signup-link' %>
         </div>
       </div>

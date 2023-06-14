@@ -24,7 +24,7 @@ class ReservationsController < ApplicationController
     @reservation.room = @room
     if @reservation.valid?
       session[:reservation_data] = @reservation.attributes
-      redirect_to confirm_user_reservation_path(@user,@room,@reservation), notice: '予約を登録しました'
+      redirect_to confirm_user_reservation_user_room_reservations_path(@user,@room,@reservation), notice: '予約を登録しました'
     else
       flash.now[:error] = '施設の登録に失敗しました'
       render :new
@@ -44,7 +44,7 @@ class ReservationsController < ApplicationController
     @reservation.user = @user
     @reservation.room = @room
     if @reservation.save
-      redirect_to index_user_reservation_path(@user,@room,@reservation), notice: '予約を登録しました'
+      redirect_to reservations_index_path(@user,@room,@reservation), notice: '予約を登録しました'
     else
       flash.now[:error] = '施設の登録に失敗しました'
       render :new
