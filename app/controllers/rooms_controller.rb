@@ -21,6 +21,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     @room.user = @user
     if @room.save
+      session[:user_id] = @user.id
       redirect_to user_room_path(user_id: @user.id, id: @room.id), notice: '施設を登録しました'
     else
       flash.now[:error] = '施設の登録に失敗しました'
@@ -31,6 +32,7 @@ class RoomsController < ApplicationController
   def show
     @user = current_user
     @room = Room.find(params[:id])
+    p @room.room_image
   end
 
   def edit

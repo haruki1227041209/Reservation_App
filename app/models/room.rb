@@ -2,6 +2,8 @@ class Room < ApplicationRecord
   belongs_to :user
   has_many :reservations
 
+  mount_uploader :room_image, RoomImageUploader
+
   validates :room_name, presence: true
   validates :description, presence: true
   validates :room_fee, presence: true, numericality: { only_integer: true, greater_than: 0 }
