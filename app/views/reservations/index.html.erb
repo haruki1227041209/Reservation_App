@@ -46,7 +46,7 @@
       <tr>
         <td>
           <% if reservation.room.room_image.present? %>
-            <%= image_tag reservation.room.room_image, class: "reservation-image" %>
+            <%= image_tag reservation.room.room_image.url, class: "reservation-image" %>
           <% else %>
             <%= image_tag "room_image.png", class: "reservation-image" %>
           <% end %>
