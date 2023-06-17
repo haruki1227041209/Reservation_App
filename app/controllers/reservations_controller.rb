@@ -3,9 +3,6 @@ class ReservationsController < ApplicationController
   def index
     @user = current_user
     @reservations = current_user.reservations
-    @reservations.each do |reservation|
-      amount = reservation.room.room_fee * reservation.num_guests * reservation.stay_duration
-    end
   end
 
   def new

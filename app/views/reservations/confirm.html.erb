@@ -53,7 +53,7 @@
   <p>宿泊人数: <%= @reservation.num_guests %></p>
   <p>合計料金: <%= @reservation.payment_amount %></p>
 
-  <%= form_for @reservation, method: :post, url: confirm_user_room_reservations_path(user_id: @reservation.user_id, room_id: @reservation.room_id) do |form| %>
+  <%= form_with(model: @reservation, method: :post, url: confirm_user_room_reservations_path(id: @user.id), local: true) do |form| %>
     <%= form.hidden_field :check_in_date %>
     <%= form.hidden_field :check_out_date %>
     <%= form.hidden_field :num_guests %>
