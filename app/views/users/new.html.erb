@@ -1,0 +1,39 @@
+<div class="login-container">
+  <h1 class="login-heading">ユーザー登録</h1>
+
+  <%= form_with model: @user, url: signup_users_path, local: true do |form| %>
+    <% if @user.errors.any? %>
+      <div class="error-messages">
+        <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :name, '名前' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email, 'メールアドレス' %>
+      <%= form.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password, 'パスワード' %>
+      <%= form.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation, '確認用パスワード' %>
+      <%= form.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <%= form.submit '登録', class: 'login-button' %>
+  <% end %>
+  <p><%= link_to 'ログイン', login_path, class: 'signup-link' %></p>
+</div>

@@ -1,0 +1,24 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>アカウント</h1>
+    <p><%= link_to "編集", edit_account_user_path(@user) %></p>
+  </div>
+
+  <% if @user %>
+    <div class="profile-info">
+      <p>メールアドレス：<%= @user.email %></p>
+      <p>パスワード：*********</p>
+    </div>
+  <% else %>
+    <p>ユーザーが見つかりません。</p>
+  <% end %>
+
+  <div class="profile-links">
+    <table>
+      <tr>
+        <td><%= link_to 'アカウント', show_account_user_path(@user) %></td>
+        <td><%= link_to 'プロフィール', show_profile_user_path(@user) %></td>
+      </tr>
+    </table>
+  </div>
+</div>

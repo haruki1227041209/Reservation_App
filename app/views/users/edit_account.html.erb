@@ -1,0 +1,52 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>アカウント編集</h1>
+  </div>
+
+  <%= form_with model: @user, url: update_account_user_path(@user), local: true do |form| %>
+    <% if @user.errors.any? %>
+      <div class="error-messages">
+        <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-field">
+      <%= form.label :email, 'メールアドレス' %>
+      <%= form.email_field :email %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :current_password, '現在のパスワード' %>
+      <%= form.password_field :current_password %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :new_password, '新しいパスワード' %>
+      <%= form.password_field :password %>
+    </div>
+
+    <div class="form-field">
+      <%= form.label :new_password_confirmation, '新しいパスワード(確認)' %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit '編集完了' %>
+      <%= link_to 'キャンセル', show_account_user_path(@user) %>
+    </div>
+  <% end %>
+
+  <div class="profile-links">
+    <table>
+      <tr>
+        <td><%= link_to 'アカウント', show_account_user_path(@user) %></td>
+        <td><%= link_to 'プロフィール', show_profile_user_path(@user) %></td>
+      </tr>
+    </table>
+  </div>
+</div>

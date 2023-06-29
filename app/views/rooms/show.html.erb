@@ -1,0 +1,102 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+  }
+
+  .room-container {
+    display: flex;
+    align-items: stretch;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 20px;
+  }
+
+  .room-image {
+    flex: 0 0 50%;
+    position: relative;
+  }
+
+  .room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .room-content {
+    flex: 1;
+    padding: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #3897f0;
+    padding: 10px 20px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  a:hover {
+    background-color: #1976d2;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin: 20px;
+    color: #333;
+  }
+</style>
+
+<h1>施設詳細</h1>
+
+<div class="room-container">
+  <div class="room-image">
+    <% if @room.room_image.present? %>
+      <%= image_tag @room.room_image.url %>
+    <% else %>
+      <%= image_tag "room_image.png" %>
+    <% end %>
+  </div>
+
+  <div class="room-content">
+    <table>
+      <tr>
+        <th>施設名</th>
+        <td><%= @room.room_name %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @room.address %></td>
+      </tr>
+      <tr>
+        <th>紹介文</th>
+        <td><%= @room.description %></td>
+      </tr>
+      <tr>
+        <th>料金</th>
+        <td><%= @room.room_fee %></td>
+      </tr>
+    </table>
+    <%= link_to '予約する', new_user_room_reservation_path(@user, @room, @reservation) %>
+  </div>
+</div>

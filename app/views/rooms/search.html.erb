@@ -1,0 +1,68 @@
+<style>
+  .search-results {
+    margin-top: 20px;
+  }
+
+  .search-results table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .search-results th,
+  .search-results td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .search-results th {
+    font-weight: bold;
+  }
+
+  .search-results img {
+    max-width: 100px;
+    height: auto;
+  }
+</style>
+
+<div class="search-results">
+  <h3>検索結果</h3>
+  <p>検索キーワード: <%= params[:search_query] || params[:search_address] %></p>
+  <p>該当する施設は <%= @rooms.length %> 件あります。</p>
+</div>
+
+<% if @rooms.present? %>
+  <div class="search-results">
+    <table>
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>施設名</th>
+          <th>住所</th>
+          <th>紹介文</th>
+          <th>料金</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rooms.each do |room| %>
+          <tr>
+            <td>
+              <% if room.room_image.present? %>
+                <%= image_tag room.room_image.url %>
+              <% else %>
+                <%= image_tag "room_image.png" %>
+              <% end %>
+            </td>
+            <td><%= link_to room.room_name, room %></td>
+            <td><%= room.address %></td>
+            <td><%= room.description %></td>
+            <td><%= room.room_fee %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>該当する施設はありません。</p>
+<% end %>

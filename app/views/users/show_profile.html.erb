@@ -1,0 +1,32 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>プロフィール</h1>
+    <p><%= link_to "編集", edit_profile_user_path(@user) %></p>
+  </div>
+
+  
+
+  <div class="profile-content">
+    <div class="profile-image">
+      <% if @user.icon.present? %>
+        <%= image_tag @user.icon, size: "100x100" %>
+      <% else %>
+        <%= image_tag "icon.png", size: "100x100" %>
+      <% end %>
+    </div>
+    
+    <div class="profile-info">
+      <p>名前：<%= @user.name %></p>
+      <p>自己紹介：<%= @user.bio %></p>
+    </div>
+  </div>
+
+  <div class="profile-links">
+    <table>
+      <tr>
+        <td><%= link_to 'アカウント', show_account_user_path(@user) %></td>
+        <td><%= link_to 'プロフィール', show_profile_user_path(@user) %></td>
+      </tr>
+    </table>
+  </div>
+</div>
